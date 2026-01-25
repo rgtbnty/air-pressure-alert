@@ -1,5 +1,5 @@
 import openmeteo_requests
-
+import json
 import pandas as pd
 import requests_cache
 from retry_requests import retry
@@ -41,3 +41,6 @@ hourly_data["pressure_msl"] = hourly_pressure_msl
 
 hourly_dataframe = pd.DataFrame(data = hourly_data)
 print("\nHourly data\n", hourly_dataframe)
+
+# store data to another file
+hourly_dataframe.to_csv("../storage/output.csv", index=False)
