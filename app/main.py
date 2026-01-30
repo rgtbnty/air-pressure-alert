@@ -5,6 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = BASE_DIR / "storage"
 
 def main():
+    print("GitHub Actions is running!")
     df = fetch_pressure_data()
     export_file(df, STORAGE_DIR)
 
