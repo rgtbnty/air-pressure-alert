@@ -1,7 +1,7 @@
-def add_pressure_delta(df, windows, col="pressure_msl"):
+def add_pressure_delta_inplace(df, windows, col="pressure_msl"):
+    """Add dp_* columns to df (in-place)."""
     for label, hours in windows.items():
         df[f"dp_{label}"] = df[col].diff(hours)
-    return df
     
 def calc_risk_from_delta_pressure(dp, RISK_CONFIG):
     if dp <= RISK_CONFIG["down"]["high"]:
