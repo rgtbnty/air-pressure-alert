@@ -41,6 +41,9 @@ def fetch_pressure_data():
     hourly_data["pressure_msl"] = hourly_pressure_msl
 
     hourly_dataframe = pd.DataFrame(data = hourly_data)
+    # delete past data
+    now = pd.Timestamp.now(tz="UTC")
+    hourly_dataframe = hourly_dataframe[hourly_dataframe["date"] >= now]
     # print("\nHourly data\n", hourly_dataframe)
     return hourly_dataframe
 
