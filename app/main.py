@@ -3,7 +3,7 @@ from pathlib import Path
 from logic.pressure_change import add_pressure_delta_inplace, calc_risk_from_delta_pressure
 import pandas as pd
 from logic.risk_config import RISK_CONFIG
-from visualization.plot_pressure import make_graph, color_graph, show_graph
+from visualization.plot_pressure import make_graph, color_graph, show_graph, plot_risk_markers
 import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -34,11 +34,13 @@ def main():
                 RISK_CONFIG[label]
             )
         )    
-    
 
     fig, ax, df = make_graph(df)
-    color_graph(ax, df, "risk_6h")
-    show_graph(ax)
+    for label in ["3h", "6h", "12h"]:
+        risk_col = f"risk_{label}"
+        color_graph(ax, df, f"risk_{label}")
+        plot_risk_markers(ax, df, risk_col)
+    show_graph(ax, label)
     plt.tight_layout()
     plt.show()
 
