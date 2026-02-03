@@ -25,15 +25,24 @@ def main():
 
     # export_file(df, STORAGE_DIR)
     add_pressure_delta_inplace(df, HOUR)
-    for label in HOUR:
-        dp_col = f"dp_{label}"
-        risk_col = f"risk_{label}"
-        df[risk_col] = df[dp_col].apply(
-            lambda dp: calc_risk_from_delta_pressure(
-                dp,
-                RISK_CONFIG[label]
-            )
-        )    
+    # for label in HOUR:
+    #     dp_col = f"dp_{label}"
+    #     risk_col = f"risk_{label}"
+    #     df[risk_col] = df[dp_col].apply(
+    #         lambda dp: calc_risk_from_delta_pressure(
+    #             dp,
+    #             RISK_CONFIG[label]
+    #         )
+    #     )    
+    for label in HOUR.keys():
+        df[f"risk_{label}"] = df.apply(
+            lambda row: calc_risk_from_delta_pressure(
+                row[f"dp_diff_{label}"],
+                row[f"dp_range_{label}"],
+                RISK_CONFIG[label],
+            ),
+            axis=1,
+        )
 
     fig, ax, df = make_graph(df)
     for label in ["3h", "6h", "12h"]:
