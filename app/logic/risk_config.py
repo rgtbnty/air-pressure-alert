@@ -1,14 +1,38 @@
 RISK_CONFIG = {
     "3h": {
-        "down": {"low": -2, "medium": -3, "high": -4},
-        "up":   {"low":  2, "medium":  3, "high":  4}
+        "diff": {
+            "low": 2.0,
+            "med": 3.0,
+            "high": 4.0,
+        },
+        "range": {
+            "low": 2.5,
+            "med": 3.5,
+            "high": 4.5,
+        },
     },
     "6h": {
-        "down": {"low": -3, "medium": -5, "high": -6},
-        "up":   {"low":  3, "medium":  5, "high":  6}
+        "diff": {
+            "low": 3.0,
+            "med": 5.0,
+            "high": 6.0,
+        },
+        "range": {
+            "low": 4.0,
+            "med": 6.0,
+            "high": 7.5,
+        },
     },
     "12h": {
-        "down": {"low": -5, "medium": -6, "high": -8},
-        "up":   {"low":  5, "medium":  6, "high":  8}
-    }
+        "diff": {
+            "low": 5.0,
+            "med": 6.0,
+            "high": 8.0,
+        },
+        "range": {
+            "low": 6.0,
+            "med": 8.0,
+            "high": 10.0,
+        },
+    },
 }
