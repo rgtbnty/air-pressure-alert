@@ -46,17 +46,14 @@ def make_graph(delta):
     return fig, ax, df
 
 def color_graph(ax, delta, risk_column):
-    for i in range(len(delta) - 1):
-        risk = delta.iloc[i][risk_column]
+    dates = delta["date_jst"].to_numpy()
+    risks = delta[risk_column].to_numpy()
+
+    for start, end, risk in zip(dates[:-1], dates[1:], risks[1:]):
         color = RISK_COLOR.get(risk)
         if color is None:
             continue
-        ax.axvspan(
-            delta.iloc[i]["date_jst"],
-            delta.iloc[i + 1]["date_jst"],
-            color=color,
-            alpha=0.2
-        )
+        ax.axvspan(start, end, color=color, alpha=0.2)
 
 def show_graph(ax, label):
     legend_elements = [
