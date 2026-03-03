@@ -5,10 +5,22 @@ import pandas as pd
 from logic.risk_config import RISK_CONFIG
 from visualization.plot_pressure import make_graph, color_graph, show_graph, plot_risk_markers
 import matplotlib.pyplot as plt
+import os
+from notifier.discord import send_image
+from dotenv import load_dotenv
+
+load_dotenv()
+webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+
+if os.getenv("GITHUB_ACTIONS") == "true":
+    plt.use("Agg")
+
+DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
 BASE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = BASE_DIR / "storage"
 FILE_PATH = STORAGE_DIR / "output.csv"
+IMAGE_PATH = BASE_DIR / "image" / "pressure.png"
 
 HOUR = {
     "3h": 3,
@@ -48,7 +60,12 @@ def main():
         plot_risk_markers(ax, df, risk_col)
     show_graph(ax, label)
     plt.tight_layout()
-    plt.show()
+    if DEBUG:
+        plt.show()
+    else:
+        fig.savefig(IMAGE_PATH, dpi=150, bbox_inches="tight")
+        send_image(IMAGE_PATH)
+        plt.close(fig)
 
     # for debug
     # print(RISK_CONFIG)

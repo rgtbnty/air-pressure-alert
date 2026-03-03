@@ -9,6 +9,9 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
 
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
