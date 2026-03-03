@@ -4,3 +4,4 @@ retry-requests
 openmeteo-requests
 seaborn
 matplotlib
+dotenv
