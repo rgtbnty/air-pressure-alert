@@ -4,7 +4,7 @@ from logic.pressure_change import add_pressure_delta_inplace, calc_risk_from_del
 import pandas as pd
 from logic.risk_config import RISK_CONFIG
 from visualization.plot_pressure import make_graph, color_graph, show_graph, plot_risk_markers
-import matplotlib.pyplot as plt
+import matplotlib
 import os
 from notifier.discord import send_image
 from dotenv import load_dotenv
@@ -13,7 +13,8 @@ load_dotenv()
 webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
 
 if os.getenv("GITHUB_ACTIONS") == "true":
-    plt.use("Agg")
+    matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
