@@ -1,7 +1,9 @@
 .vscode/
 launch.json
 output.csv
+a.csv
 .cache.sqlite
+app/storage
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

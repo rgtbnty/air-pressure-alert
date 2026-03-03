@@ -51,8 +51,7 @@ def fetch_pressure_data():
 # store data to another file
 def export_file(df, dir_storage):
     dir_storage.mkdir(exist_ok=True)
-    df.to_csv(
-        dir_storage / "output.csv", index=False)
+    df.to_csv(dir_storage, index=False)
 
 
 if __name__ == "__main__":

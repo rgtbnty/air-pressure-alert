@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = BASE_DIR / "storage"
+FILE_PATH = STORAGE_DIR / "output.csv"
 
 HOUR = {
     "3h": 3,
@@ -17,10 +18,14 @@ HOUR = {
 
 def main():
     print("GitHub Actions is running!")
-    # df = fetch_pressure_data()
+    df = fetch_pressure_data()
 
+    # if FILE_PATH.exists():
+    #     df = pd.read_csv(FILE_PATH)
+    # else:
+    #     print("output.csv not found. Creating new DataFrame.")
+    #     df = fetch_pressure_data()
     # for debug
-    df = pd.read_csv(STORAGE_DIR / "output.csv")
     # print(df)
 
     # export_file(df, STORAGE_DIR)
